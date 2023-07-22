@@ -7,12 +7,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../components/Spinner";
 import { HomePageVideos } from "../Types";
 import Card from "../components/Card";
+import { clearVideos } from "../store";
 
 type Props = {};
 
 const Home = (props: Props) => {
   const dispatch = useAppDispatch();
   const videos = useAppSelector((state) => state.youtubeApp.videos);
+
+  useEffect(() => {
+    dispatch(clearVideos());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getHomePageVideos(false));
